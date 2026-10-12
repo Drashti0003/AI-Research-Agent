@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResearchAI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">🤖</div>
+            <div><h2>ResearchAI</h2><span>AI Research Agent</span></div>
+        </div>
+        <button id="newResearch" class="new-research">＋ New Chat</button>
+        <div class="history-header">
+            <span>Chat History</span>
+            <button id="clearHistory" title="Clear history" aria-label="Clear history">🗑</button>
+        </div>
+        <div id="historyList" class="history-list">
+            <div class="history-empty">No conversations yet.</div>
+        </div>
+        <div class="sidebar-footer">AI Research Assistant</div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div><span class="online-dot"></span> Agent Online</div>
+            <div class="topbar-actions">
+                <label for="languageSelect" class="language-label">Answer language</label>
+                <select id="languageSelect" class="language-select" aria-label="Input and answer language">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="gu">ગુજરાતી (Gujarati)</option>
+                </select>
+                <button id="themeButton" class="icon-button" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+            </div>
+        </header>
+
+        <section id="welcome" class="welcome">
+            <div class="welcome-icon">🔎</div>
+            <h1>AI Research Assistant</h1>
+            <p>Ask a question, explore a topic, and continue the conversation with follow-up questions.</p>
+            <div class="research-box">
+                <textarea id="question" rows="3" placeholder="Ask your research question..." aria-label="Research question"></textarea>
+                <div class="input-bottom">
+                    <div class="input-hint"><span>Enter → Send</span><span>Shift + Enter → New line</span></div>
+                    <div class="input-actions">
+                        <button id="voiceButton" class="round-button" title="Voice input" aria-label="Start voice input">🎤</button>
+                        <button id="researchButton" class="research-button">Research <span>→</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="examples">
+                <p>Try an example</p>
+                <button class="example-card" data-question="What is Generative AI?">✨ <div><strong>Generative AI</strong><small>Understand Generative AI</small></div></button>
+                <button class="example-card" data-question="What is Retrieval Augmented Generation (RAG)?">📚 <div><strong>RAG</strong><small>Understand retrieval augmented generation</small></div></button>
+                <button class="example-card" data-question="How is artificial intelligence used in agriculture?">🌱 <div><strong>AI in Agriculture</strong><small>Explore agricultural AI</small></div></button>
+            </div>
+        </section>
+
+        <section id="researchView" class="research-view hidden">
+            <div class="question-header">
+                <div>
+                    <span class="label">CURRENT CHAT</span>
+                    <h2 id="questionTitle">Research conversation</h2>
+                </div>
+                <button id="askAnother" class="secondary-button">＋ New Chat</button>
+            </div>
+
+            <div id="agentStatus" class="agent-status hidden" role="status" aria-live="polite">
+                <div class="status-title"><span class="spinner-small"></span><span id="statusText">Researching your question…</span></div>
+                <div class="status-steps">
+                    <div id="stepPlan" class="status-step"><span>○</span> Understanding question</div>
+                    <div id="stepSearch" class="status-step"><span>○</span> Searching web</div>
+                    <div id="stepAnalyze" class="status-step"><span>○</span> Analyzing information</div>
+                    <div id="stepAnswer" class="status-step"><span>○</span> Preparing answer</div>
+                </div>
+            </div>
+
+            <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+            <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+
+            <div class="research-box chat-composer">
+                <textarea id="followupQuestion" rows="2" placeholder="Ask a follow-up question..." aria-label="Follow-up question"></textarea>
+                <div class="input-bottom">
+                    <div class="input-hint"><span>Enter → Send</span><span>Shift + Enter → New line</span></div>
+                    <div class="input-actions">
+                        <button id="followupVoiceButton" class="round-button" title="Voice input" aria-label="Start voice input">🎤</button>
+                        <button id="followupButton" class="research-button">Send <span>→</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
